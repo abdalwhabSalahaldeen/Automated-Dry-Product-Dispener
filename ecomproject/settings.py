@@ -14,6 +14,7 @@ from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
+import django_heroku
 
 
 # Quick-start development settings - unsuitable for production
@@ -128,6 +129,8 @@ STATIC_ROOT = BASE_DIR / "static_cdn"
 MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"
 
+
+django_heroku.settings(locals())
 
 EMAIL_HOST = "smtp.gmail.com"
 EMAIL_USE_TLS = True
