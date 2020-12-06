@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     "ecomapp",
     'include_by_ajax',
     'django_ajax',
+    'gunicorn',
 ]
 
 MIDDLEWARE = [
