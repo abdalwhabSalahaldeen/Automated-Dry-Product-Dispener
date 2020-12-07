@@ -61,7 +61,7 @@ class ProductDetailView(EcomMixin, TemplateView):
         return context
 
 
-class AddToCartView(EcomMixin,AJAXMixin, TemplateView):
+class AddToCartView(EcomMixin, TemplateView):
     template_name = "addtocart.html"
 
     def get_context_data(self, **kwargs):
