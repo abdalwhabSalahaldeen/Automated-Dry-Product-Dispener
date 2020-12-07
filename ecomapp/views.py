@@ -105,7 +105,16 @@ class AddToCartView(EcomMixin,AJAXMixin, TemplateView):
 
 
 
+from django_ajax.decorators import ajax
 
+def CartProductUpdate(request,pk,quantity):
+    Cartproduct = CartProduct.objects.get(pk=pk)
+    print (Cartproduct)
+    Cartproduct.quantity=quantity
+    Cartproduct.subtotal=Cartproduct.rate*quantity
+    Cartproduct.save()
+    return redirect(reverse('ecomapp:mycart'))
+    
 
 
 

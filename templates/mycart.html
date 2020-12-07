@@ -24,8 +24,8 @@
                         <td>{{forloop.counter}}</td>
                         <td>{{cp.product.title}}</td>
                         <td>{{cp.rate}}</td>
-                        <td>{{cp.quantity}}</td>
-                        <td>{{cp.subtotal}}</td>
+                        <td><input class="w-50 input-{{ cp.pk }}" type="text" value="{{cp.quantity}}"></td>
+                        <td class="total-{{ cp.pk }}">{{cp.subtotal}}</td>
                         <td>
                             <a href="{% url 'ecomapp:managecart' cp.id %}?action=inc" class="btn btn-primary"> + </a>
                             <a href="{% url 'ecomapp:managecart' cp.id %}?action=dcr" class="btn btn-warning"> - </a>
@@ -50,4 +50,35 @@
         </div>
     </div>
 </div>
+
+
 {% endblock %}
+
+
+
+
+{% block js %}
+
+    
+    <script>
+        $(document).ready(function(){
+            {% for p in cart.cartproduct_set.all %}
+            val=0
+            $(".input-{{p.pk}}").on('input', function() {
+                console.log({{p.pk}});
+                va=$(".input-{{p.pk}}").val();
+                $.ajax({url: "/CartProductUpdate-"+ va +"-{{p.pk}}/", success: function(result){
+                    console.log({{p.rate}}*va);
+                    $(".total-{{p.pk}}").text({{p.rate}}*va);
+
+                }});
+            });
+            {% endfor %}
+
+
+
+
+        });
+        </script>
+
+{% endblock %}  

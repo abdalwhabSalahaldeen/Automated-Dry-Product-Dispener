@@ -12,13 +12,18 @@ class Admin(models.Model):
     def __str__(self):
         return self.user.username
 
+user_CHOICES=(
+    (1,'قطاعي'),
+    (2,'جملة'),
+
+)
 
 class Customer(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     full_name = models.CharField(max_length=200)
     address = models.CharField(max_length=200, null=True, blank=True)
     joined_on = models.DateTimeField(auto_now_add=True)
-
+    Type_user=models.IntegerField(verbose_name="نوع المستخدم",default=1,choices=user_CHOICES) 
     def __str__(self):
         return self.full_name
 
