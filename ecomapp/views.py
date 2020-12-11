@@ -61,7 +61,7 @@ class ProductDetailView(EcomMixin, TemplateView):
         return context
 
 
-class AddToCartView(EcomMixin, TemplateView):
+class AddToCartView(EcomMixin,AJAXMixin, TemplateView):
     template_name = "addtocart.html"
 
     def get_context_data(self, **kwargs):
@@ -108,11 +108,28 @@ class AddToCartView(EcomMixin, TemplateView):
 from django_ajax.decorators import ajax
 
 def CartProductUpdate(request,pk,quantity):
+    cart_id = request.session.get("cart_id", None)
     Cartproduct = CartProduct.objects.get(pk=pk)
-    print (Cartproduct)
+    product_obj = Product.objects.get(pk=Cartproduct.product.pk)
+
     Cartproduct.quantity=quantity
-    Cartproduct.subtotal=Cartproduct.rate*quantity
+    Cartproduct.subtotal=product_obj.selling_price*quantity
+
+
+    #cart_obj.total += Cartproduct.subtotal
     Cartproduct.save()
+    #cart_obj.save()
+
+
+    allprice= CartProduct.objects.filter(cart=cart_id)
+    cart_obj = Cart.objects.get(pk=cart_id)
+    cart_obj.total=0
+    for al in  allprice:
+
+        cart_obj.total+=al.subtotal
+        cart_obj.save()
+
+
     return redirect(reverse('ecomapp:mycart'))
     
 
@@ -172,7 +189,20 @@ class MyCartView(EcomMixin, TemplateView):
             cart = None
         context['cart'] = cart
         return context
+from django.shortcuts import get_object_or_404
 
+class CategoryView(EcomMixin, TemplateView):
+    template_name = "Category.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        url_slug = self.kwargs['slug']
+        category = Category.objects.get(slug=url_slug)
+        product = Product.objects.filter(category=category)
+        context['category'] = category
+        context['product'] = product
+        
+        return context
 
 class CheckoutView(EcomMixin, CreateView):
     template_name = "checkout.html"

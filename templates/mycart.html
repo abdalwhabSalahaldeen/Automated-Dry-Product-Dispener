@@ -5,7 +5,7 @@
 {% block content %}
 <div class="container">
     <div class="row">
-        <div class="col-md-8">
+        <div class="col-md-12">
             <h4>Items in my cart</h4><hr>
             <table class="table">
                 <thead>
@@ -62,14 +62,17 @@
     
     <script>
         $(document).ready(function(){
+            var totalvalue=0;
             {% for p in cart.cartproduct_set.all %}
             val=0
+
             $(".input-{{p.pk}}").on('input', function() {
                 console.log({{p.pk}});
                 va=$(".input-{{p.pk}}").val();
                 $.ajax({url: "/CartProductUpdate-"+ va +"-{{p.pk}}/", success: function(result){
-                    console.log({{p.rate}}*va);
+                    totalvalue={{p.rate}}*va;
                     $(".total-{{p.pk}}").text({{p.rate}}*va);
+                 
 
                 }});
             });

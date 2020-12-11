@@ -22,6 +22,7 @@ urlpatterns = [
 
     path("CartProductUpdate-<int:quantity>-<int:pk>/", CartProductUpdate, name='CartProductUpdate'),
 
+    path("category/<slug:slug>/", CategoryView.as_view(), name="CategoryView"),
 
 
     path("khalti-request/", KhaltiRequestView.as_view(), name="khaltirequest"),

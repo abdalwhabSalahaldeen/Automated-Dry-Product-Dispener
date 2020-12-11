@@ -10,13 +10,10 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
-
-
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
-import django_heroku
 
 
 # Quick-start development settings - unsuitable for production
@@ -28,7 +25,7 @@ SECRET_KEY = '1x+(0yub_lq_a24fcwgt=2e)n0vk))pht0^kh13-2!0e&q*e_r'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -44,7 +41,8 @@ INSTALLED_APPS = [
     "ecomapp",
     'include_by_ajax',
     'django_ajax',
-    'gunicorn',
+    'import_export',
+
 ]
 
 MIDDLEWARE = [
@@ -55,8 +53,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-
-  'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'ecomproject.urls'
@@ -79,7 +75,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'ecomproject.wsgi.application'
 
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
@@ -109,7 +105,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-import os
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
@@ -129,15 +124,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
-
-STATIC_ROOT= os.path.join(STATIC_URL,'')
-STATICFILES_DIRS=(
-    os.path.join(BASE_DIR,'static/'),
-)
-
+STATICFILES_DIRS = [BASE_DIR / "static"]
+STATIC_ROOT = BASE_DIR / "static_cdn"
 MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"
-
 
 
 EMAIL_HOST = "smtp.gmail.com"
