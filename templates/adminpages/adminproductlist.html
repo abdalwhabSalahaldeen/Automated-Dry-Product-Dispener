@@ -23,7 +23,8 @@
                     <tr>
                         <td>{{forloop.counter}}</td>
                         <td>{{p.title}}</td>
-                        <td><img src="{{p.image.url}}" style="height: 60px;" alt=""></td>
+                       
+                        <td><a href="{% url 'ecomapp:addtocart' p.id %}" class="btn btn-primary">أضف</a></td> 
                         <td>{{p.selling_price}}</td>
                         <td>{{p.view_count}}</td>
                     </tr>

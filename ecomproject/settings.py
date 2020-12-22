@@ -25,7 +25,7 @@ SECRET_KEY = '1x+(0yub_lq_a24fcwgt=2e)n0vk))pht0^kh13-2!0e&q*e_r'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -39,8 +39,6 @@ INSTALLED_APPS = [
     'django.contrib.humanize',
     'django.contrib.staticfiles',
     "ecomapp",
-    'include_by_ajax',
-    'django_ajax',
     'import_export',
 
 ]
@@ -53,10 +51,11 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-  'whitenoise.middleware.WhiteNoiseMiddleware',
+
+ # 'whitenoise.middleware.WhiteNoiseMiddleware',
 
 ]
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+#STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 ROOT_URLCONF = 'ecomproject.urls'
 
@@ -112,7 +111,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ar'
 
 TIME_ZONE = 'Asia/Kathmandu'
 
@@ -136,5 +135,5 @@ MEDIA_ROOT = BASE_DIR / "media"
 EMAIL_HOST = "smtp.gmail.com"
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
-EMAIL_HOST_USER = "yourowngmail@gmail.com"
-EMAIL_HOST_PASSWORD = "yourowngmailpassword"
+EMAIL_HOST_USER = "mohmed.elnzir@gmail.com"
+EMAIL_HOST_PASSWORD = "mohmed.elnzir@gmail.com"
