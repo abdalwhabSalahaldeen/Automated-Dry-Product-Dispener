@@ -568,3 +568,18 @@ class AdminProductCreateView(AdminRequiredMixin, CreateView):
         for i in images:
             ProductImage.objects.create(product=p, image=i)
         return super().form_valid(form)
+
+
+
+#you might need to easy_install this
+import json 
+from django.http import HttpResponse
+
+def cartjson(request,pk):
+    # You can dump a lot of structured data into a json object, such as 
+    # lists and touples
+    cart_obj = Cart.objects.get(id=pk)
+    # json data is just a JSON string now. 
+    ctx = {'total': cart_obj.total}
+    # use mimetype instead of content_type if django < 5
+    return HttpResponse(json.dumps(ctx), content_type='application/json')

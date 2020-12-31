@@ -32,7 +32,7 @@
                         <td>{{cp.rate}}</td>
                         
                         <td><input class="w-50 input-{{ cp.pk }}" type="text" value="{{cp.quantity}}"></td>
-                        <td>{{cp.product.title}}</td>
+                        <td >{{cp.product.title}}</td>
                         <td>
                             
                             <a href="{% url 'ecomapp:managecart' cp.id %}?action=inc" class="btn btn-primary"> + </a>
@@ -44,7 +44,7 @@
                     </div>
                     {% endfor %}
                     <tr>
-                        <th> {{cart.total}} -SDG</th>
+                        <th id="total"> {{cart.total}} -SDG</th>
                         <td colspan="4" class="text-right">الاجمالي</td>
                         
                         {% if cart.cartproduct_set.all %}
@@ -59,24 +59,6 @@
                     </tr>
                     <br>
                     <tr> <th><a class="tabbable" href="{% url 'ecomapp:emptycart' %}">حذف الطلبية </a></th></tr>
-                    <script>
-                        <!--
-                        function timedRefresh(timeoutPeriod) {
-                            setTimeout("location.reload(true);",timeoutPeriod);
-                        }
-                        
-                        window.onload = timedRefresh(7000);
-                        
-                        //   -->
-                        document.addEventListener("DOMContentLoaded", function(event) { 
-            var scrollpos = localStorage.getItem('scrollpos');
-            if (scrollpos) window.scrollTo(0, scrollpos);
-        });
-
-        window.onbeforeunload = function(e) {
-            localStorage.setItem('scrollpos', window.scrollY);
-        };
-                        </script>
                     {% endif %}
                 </tbody>
             </table>
@@ -90,31 +72,57 @@
 
 
 
+
 {% block js %}
 
     
     <script>
         $(document).ready(function(){
-            var totalvalue=0;
+ 
+            var ajaxFn = function () {
+
+$.ajax({url: "/cart-{{cart.pk}}/", 
+            success: function(result){
+                $("#total").text(result.total);
+                $("#total_value_added").text(result.total_value_added);
+            }});
+
+}
+
+
             {% for p in cart.cartproduct_set.all %}
             val=0
-
             $(".input-{{p.pk}}").on('input', function() {
-                console.log({{p.pk}});
+
+
+
                 va=$(".input-{{p.pk}}").val();
                 $.ajax({url: "/CartProductUpdate-"+ va +"-{{p.pk}}/", success: function(result){
-                    totalvalue={{p.rate}}*va;
                     $(".total-{{p.pk}}").text({{p.rate}}*va);
-                 
+                    timeOutId = setTimeout(ajaxFn, 10);
 
                 }});
+
+
+
+
             });
             {% endfor %}
 
+            $("#update").on('click', function() {
 
-
+            $.ajax({url: "/cart-{{cart.pk}}/", 
+                success: function(result){
+                    $("#total").text(result.total);
+                    $("#total_value_added").text(result.total_value_added);
+                }});
 
         });
+    });
+
+    var timeOutId = 0;
+//we define our function and STORE it in a var
+
         </script>
 
 {% endblock %}  
