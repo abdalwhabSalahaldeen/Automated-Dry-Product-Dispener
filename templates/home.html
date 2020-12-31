@@ -3,7 +3,14 @@
 {% block title %}Home{% endblock %}
 
 
+
+
+
+
 {% block content %}
+
+
+
 
 
 <div class="container">
@@ -18,7 +25,7 @@
                 <h4><a href="{% url 'ecomapp:productdetail' p.slug %}">{{p.title}}</a></h4>
                 <img src="{{p.image.url}}" alt="" class="img-fluid" style="height: 200px; object-fit: contain;">
                 <p class="mt-3">السعر <strike>SDG -  {{p.marked_price}}</strike> SDG -  {{p.selling_price}}</p>
-                <button  class="btn btn-primary id-{{p.pk}}">شراء</button>
+                <button  class="btn btn-primary id-{{p.pk}} buy-now">شراء</button>
             </div>
          </div>
     </div>
@@ -84,7 +91,7 @@
                 <tr class="styled-table" >
                     <td style="width: 50%;"><a href="{% url 'ecomapp:productdetail' p.slug %}">{{p.title}}</a></td>
                     <td style="width: 25%;"><p class="mt-3"><strike></strike> SDG -  {{p.selling_price}}</p></td>
-                    <td style="width: 25%;" ><button  class="d-flex  btn btn-primary id-{{p.pk}} " style="width: 100% !important;/*! text-align: center; */justify-content: center;">أضف</button ></td>
+                    <td style="width: 25%;" ><button  class="d-flex  btn btn-primary id-{{p.pk}} buy-now" style="width: 100% !important;/*! text-align: center; */justify-content: center;">أضف</button ></td>
                 </tr>
               
                 <!-- and so on... -->
@@ -121,7 +128,7 @@
             <h4><a href="{% url 'ecomapp:productdetail' p.slug %}">{{p.title}}</a></h4>
             <img src="{{p.image.url}}" alt="" class="img-fluid" style="height: 200px; object-fit: contain;">
             <p class="mt-3"><strike> {{p.marked_price}}</strike>  SDG -  {{p.selling_price}} :السعر </p>
-            <button  class="btn btn-primary id-{{p.pk}}">شراء</button>
+            <button  class="btn btn-primary id-{{p.pk}} buy-now" >شراء</button>
         </div>
     </div>
     {% endfor %}
