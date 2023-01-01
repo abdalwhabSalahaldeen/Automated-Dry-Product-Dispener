@@ -15,159 +15,29 @@
 
 <div class="container">
 
-    <h1 class="text-center">مرحبا بك في موقع طلبيات </h1>
-{% if request.user.customer.Type_user == 1 %}
-    <div class="row mt-3">
 
-        {% for p in product_list %}
-        <div class="col-md-4 col-lg-8 card">
-            <div class="m-4">
-                <h4><a href="{% url 'ecomapp:productdetail' p.slug %}">{{p.title}}</a></h4>
-                <img src="{{p.image.url}}" alt="" class="img-fluid" style="height: 200px; object-fit: contain;">
-                <p class="mt-3">السعر <strike>SDG -  {{p.marked_price}}</strike> SDG -  {{p.selling_price}}</p>
-                <button  class="btn btn-primary id-{{p.pk}} buy-now">شراء</button>
-            </div>
-         </div>
-    </div>
-    </div>
-    
-        {% endfor %}
-    </div>
-    <nav aria-label="...">
-        <ul class="pagination">
-            {% if product_list.has_previous %}
-            <li class="page-item">
-                <a class="page-link" href="?page={{ product_list.previous_page_number }}">السابقة</a>
-              </li>
-            {% else %}
-            <li class="page-item disabled">
-                <a class="page-link" href="#" tabindex="-1" aria-disabled="true">السابقة</a>
-            </li>
-            {% endif %}
-
-            {% for i in product_list.paginator.page_range %}
-            {% if i == product_list.number %}
-            <li class="page-item active"><a class="page-link">{{i}}</a></li>
-            {% else %}
-            <li class="page-item"><a class="page-link" href="?page={{i}}">{{i}}</a></li>
-            {% endif %}
-            {% endfor %}
-
-            {% if product_list.has_next %}
-            <li class="page-item">
-                <a class="page-link" href="?page={{ product_list.next_page_number }}">التالي</a>
-            </li>
-            {% else %}
-            <li class="page-item disabled">
-                <a class="page-link" href="#" tabindex="-1" aria-disabled="true">التالي</a>
-            </li>
-            {% endif %}
-            
    
-{% elif request.user.customer.Type_user == 2 %}
-<link href="static/css/main.css" rel="stylesheet" type="text/css">
-</ul>
-</nav>
-<table class="styled-table" style="width: 100% !important; min-width: 250px;">
-<thead>
-        <tbody style="No scrolling allowed here!"></tbody>
-<tr>
-    
-    <th>الأسم</th>
-    <th>السعر </th>
-    <th>أضف </th>
 
-</tr>
-</thead>
-<tbody>
-   <tr>
- 
-        {% for p in product_list %}
-       
-        <table class="styled-table" style="width: 100% !important; min-width: 250px;">
-            <thead>
-             </thead>
-            <tbody>
-                <tr class="styled-table" >
-                    <td style="width: 50%;"><a href="{% url 'ecomapp:productdetail' p.slug %}">{{p.title}}</a></td>
-                    <td style="width: 25%;"><p class="mt-3"><strike></strike> SDG -  {{p.selling_price}}</p></td>
-                    <td style="width: 25%;" ><button  class="d-flex  btn btn-primary id-{{p.pk}} buy-now" style="width: 100% !important;/*! text-align: center; */justify-content: center;">أضف</button ></td>
-                </tr>
-              
-                <!-- and so on... -->
-            </tbody>
-        </table>
-    </tr>
-
-           
-        {% endfor %}
-        <br>
-    </div>
-    <nav aria-label="...">
-        <ul class="pagination">
-
-
-            {% for i in product_list.paginator.page_range %}
-            {% if i == product_list.number %}
-            <li class="page-item active"><a class="page-link">{{i}}</a></li>
-            {% else %}
-            <li class="page-item"><a class="page-link" href="?page={{i}}">{{i}}</a></li>
-            {% endif %}
-            {% endfor %}
-
-
-        </ul>
-      </nav>
-
-{% else %}
 
 <div class="row mt-3">
     {% for p in product_list %}
     <div class="col-md-3 card">
         <div class="m-4">
-            <h4><a href="{% url 'ecomapp:productdetail' p.slug %}">{{p.title}}</a></h4>
+            <h4 class="text-center"><a href="{% url 'adpdapp:productdetail' p.slug %}">{{p.title}}</a></h4>
             <img src="{{p.image.url}}" alt="" class="img-fluid" style="height: 200px; object-fit: contain;">
-            <p class="mt-3"><strike> {{p.marked_price}}</strike>  SDG -  {{p.selling_price}} :السعر </p>
-            <button  class="btn btn-primary id-{{p.pk}} buy-now" >شراء</button>
+            <p class="mt-3 text-center">Price :  {{p.selling_price}} SR/gram </p>
+            <button  class="btn btn-primary id-{{p.pk}} buy-now w-100" >Add to Cart</button>
         </div>
     </div>
     {% endfor %}
 </div>
-<nav aria-label="..." class="d-flex justify-content-center">
-    <ul class="pagination">
-        {% if product_list.has_previous %}
-        <li class="page-item">
-            <a class="page-link" href="?page={{ product_list.previous_page_number }}">التالي</a>
-          </li>
-        {% else %}
-        <li class="page-item disabled">
-            <a class="page-link" href="#" tabindex="-1" aria-disabled="true">التالي</a>
-        </li>
-        {% endif %}
 
-        {% for i in product_list.paginator.page_range %}
-        {% if i == product_list.number %}
-        <li class="page-item active"><a class="page-link">{{i}}</a></li>
-        {% else %}
-        <li class="page-item"><a class="page-link" href="?page={{i}}">{{i}}</a></li>
-        {% endif %}
-        {% endfor %}
-
-        {% if product_list.has_next %}
-        <li class="page-item">
-            <a class="page-link" href="?page={{ product_list.next_page_number }}">التالي</a>
-        </li>
-        {% else %}
-        <li class="page-item disabled">
-            <a class="page-link" href="#" tabindex="-1" aria-disabled="true">التالي</a>
-        </li>
-        {% endif %}
-    </ul>
-  </nav>
-
-{% endif %}
 
 </div>
+
+<br>
+<br>
+<br>
 {% endblock %}
 
 
@@ -180,11 +50,8 @@
             {% for p in product_list %}
 
           $(".id-{{p.pk}}").click(function(){
-            $.ajax({url: "{% url 'ecomapp:addtocart' p.id %}", success: function(result){
-                {% if request.user.customer.Type_user != 2 %}
+            $.ajax({url: "{% url 'adpdapp:addtocart' p.id %}", success: function(result){
                 alertify.alert( '{{p.title}} has been added to the cart successfully');
-                {% endif %}
-
             }});
 
           });

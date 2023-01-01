@@ -6,44 +6,42 @@
 
 
 <div class="styled-table">
-    <div class="row">
-        <div class="col-md-6">
-            <h3>اصناف تمت اضافتها الى الطلبية</h3>
-            <a href="{% url 'ecomapp:mycart' %}">Update Cart</a>
+    <div class="row d-flex justify-content-center">
+        <div class="col-md-9  justify-content-center">
+            <h3 class="text-center">Order details</h3>
+            <a class="btn btn-info text-center" href="{% url 'adpdapp:mycart' %}">Click here to change the order</a>
             <table class="table">
                 <thead>
                     <tr>
-                        <th>رقم</th>
-                        <th>الصنف</th>
-                        <th>السعر</th>
-                        <th>الكمية</th>
-                        <th>المجموع</th>
+                        <th class="text-center m-auto pb-3">ID</th>
+                        <th class="text-center m-auto pb-3">Product</th>
+                        <th class="text-center m-auto pb-3">Price</th>
+                        <th class="text-center m-auto pb-3">Quantity</th>
+                        <th class="text-center m-auto pb-3">Subtotal</th>
                     </tr>
                 </thead>
                 <tbody>
                     {% for cp in cart.cartproduct_set.all %}
                     <tr>
-                        <td>{{forloop.counter}}</td>
-                        <td>{{cp.product.title}}</td>
-                        <td>{{cp.rate}}</td>
-                        <td>{{cp.quantity}}</td>
-                        <td>{{cp.subtotal}}</td>
+                        <td class="text-center m-auto pb-3">{{forloop.counter}}</td>
+                        <td class="text-center m-auto pb-3">{{cp.product.title}}</td>
+                        <td class="text-center m-auto pb-3">{{cp.rate}}</td>
+                        <td class="text-center m-auto pb-3">{{cp.quantity}}</td>
+                        <td class="text-center m-auto pb-3">{{cp.subtotal}}</td>
                       
                     </tr>
                     {% endfor %}
                     <tr>
-                        <th colspan="4" class="text-right">الاجمالي</th>
-                        <th>ٍSDG- {{cart.total}}</th>
+                        <th colspan="4" class="text-center m-auto pb-3 pt-3">Total</th>
+                        <th class="text-center m-auto pb-3 pt-3">SR - {{cart.total}}</th>
                     </tr>
                 </tbody>
             </table>
-        </div>
-        <div class="col-md-6">
-            <h3>بيانات المشتري</h3>
             <form action="" method="POST">
+                
                 {% csrf_token %}
-                {{form.as_p}}
-                <button class="btn btn-info">تأكيد الطلبية</button>
+                {{form.as_table}}
+                <button class="btn btn-info w-100">Complete the order</button>
             </form>
         </div>
     </div>

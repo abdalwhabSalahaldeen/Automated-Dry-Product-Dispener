@@ -1,9 +1,8 @@
-{% load tag %}
 {% load i18n %}
 {% load static %}
 
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
     <meta charset="UTF-8">
@@ -32,7 +31,7 @@
     }
     .styled-table thead tr {
         
-        background-color: #009879;
+        background-color: #3092e2;
         color: #ffffff;
         text-align: left;
        
@@ -222,63 +221,30 @@
 <body>
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-info">
-        <a class="navbar-brand" href="{% url 'ecomapp:home' %}">SGR Market</a>
+        <a class="navbar-brand" href="{% url 'adpdapp:home' %}">Automated Dry Product Dispener</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-                <a class="nav-link" href="{% url 'ecomapp:home' %}">الرئيسية <span class="sr-only">(current)</span></a>
+            <ul class="navbar-nav mr-auto ml-4">
+ 
+            </ul>
+            <ul  class="navbar-nav  mr-5">
+              <li class="nav-item active">
+                <a class="nav-link" href="{% url 'adpdapp:home' %}">home <span class="sr-only">(current)</span></a>
             </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="Category1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    الأصناف
-                    </a>
-{% Catego as queries %} 
-<div class="dropdown-menu" aria-labelledby="Category1">
-    {% for c in queries %}
-    <a class="dropdown-item" href="{{ c.get_url }}">{{ c.title }}</a>
-    {% endfor %}
-    
-</div>
-            </li>
-
 
             <li class="nav-item">
-                <a class="nav-link" href="{% url 'ecomapp:mycart' %}">{% trans "السلة" %}</a>
+                <a class="nav-link" href="{% url 'adpdapp:mycart' %}">{% trans "cart" %}</a>
             </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                صفحتي
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                {% if request.user.customer %}
-                <a class="dropdown-item" href="{% url 'ecomapp:customerprofile' %}">طلبياتي</a>
-                <a class="dropdown-item" href="{% url 'ecomapp:customerlogout' %}">خروج</a>
-                {% else %}
-                <a class="dropdown-item" href="{% url 'ecomapp:customerregistration' %}">تسجيل</a>
-                <a class="dropdown-item" href="{% url 'ecomapp:customerlogin' %}">دخول</a>
-                {% endif %}
-                </div>
-            </li>
-            </ul>
-            <form class="form-inline my-2 my-lg-0" action="{% url 'ecomapp:search' %}" method="GET">
-            <input name="keyword" class="form-control mr-sm-2" type="search" placeholder="بحث عن منتج" aria-label="Search" required>
-            <button class="btn btn-danger my-2 my-sm-0" type="submit">بحث</button>
-            </form>
+
+              </ul>
+
         </div>
         </nav>
 
-        <p class="footer-links">
-            <a href="{% url 'ecomapp:home' %}">الرئيسية</a>
-            ·
-            <a href="{% url 'ecomapp:mycart' %}">المشتروات</a> 
-            ·
-            <a href="{% url 'ecomapp:customerprofile' %}">الطلبيات</a> 
-          
-    <hr>
+
 
  
     {% block content %}
@@ -376,42 +342,6 @@ alertify.defaults = {
 {% block js %}
 
 {% endblock %}
-
-<div class="footer-left">
-
-
- 
-        
-         <footer class="bg-light text-center text-lg-start">
-         
-          <p>
-     
-            <!-- Copyright -->
-            <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2)">
-                whatsapp: 0123956390 .
-                <a href="{% url 'ecomapp:home' %}">الرئيسية</a>
-            ·
-            <a href="{% url 'ecomapp:mycart' %}">المشتروات</a> 
-            ·
-            <a href="{% url 'ecomapp:customerprofile' %}">الطلبيات</a> 
-
-            
-            
-            </div>
-            <!-- Copyright -->
-          </footer>
-        
-         <style>
-            h1 {text-align: center;}
-            p {text-align: center;}
-            div {text-align: center;}
-            </style>
-        
-<br>
-
-<br>
-</div>
-
-<div class="footer-center"></body>
+</body>
 
 </html>
